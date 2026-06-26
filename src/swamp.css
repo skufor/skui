@@ -1,0 +1,901 @@
+:root {
+  --sw-bg:        #EDE6DA;
+  --sw-bg-deep:   #E4DBCB;
+  --sw-surface:   #F6F1E7;
+  --sw-raised:    #FBF8F1;
+
+  --sw-clay-50:   #FBE9E2;
+  --sw-clay-100:  #F4C9B8;
+  --sw-clay-300:  #E89B7D;
+  --sw-clay-500:  #E0785B;
+  --sw-clay-700:  #B5512F;
+  --sw-clay-900:  #7A3520;
+
+  --sw-sage-100:  #E3E8DC;
+  --sw-sage-500:  #7C8B6F;
+  --sw-sage-700:  #435236;
+
+  --sw-glaze-100: #F3E6C8;
+  --sw-glaze-500: #C99A3E;
+
+  --sw-ink:       #2E2A24;
+  --sw-ink-soft:  #5C5648;
+  --sw-ink-faint: #8C8576;
+
+  --sw-link:        #B5512F;
+  --sw-link-hover:  #903E22;
+  --sw-link-visited:#8C5A8C;
+
+  --sw-mist-65: rgba(255,255,255,0.65);
+  --sw-mist-35: rgba(255,255,255,0.35);
+  --sw-shade-16: rgba(60,45,30,0.16);
+  --sw-shade-28: rgba(60,45,30,0.28);
+  --sw-shade-48: rgba(60,45,30,0.48);
+
+  --sw-glow-a: #FBE9E2;
+
+  --sw-success: #5A8B47;
+  --sw-warning: #B8860B;
+  --sw-danger:  #B04030;
+  --sw-info:    #4A7A96;
+
+  --sw-font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sw-font-body: 'Golos Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sw-font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', Menlo, monospace;
+
+  --sw-radius-xs: 8px;
+  --sw-radius-sm: 12px;
+  --sw-radius-md: 20px;
+  --sw-radius-lg: 28px;
+  --sw-radius-pill: 999px;
+  --sw-radius-clay: 22px 26px 18px 30px;
+
+  --sw-sp-2: 0.5rem;
+  --sw-sp-3: 0.75rem;
+  --sw-sp-4: 1rem;
+  --sw-sp-5: 1.5rem;
+  --sw-sp-6: 2rem;
+
+  --sw-relief-out:  6px 8px 0 -1px var(--sw-shade-16), 10px 18px 24px -8px var(--sw-shade-28);
+  --sw-relief-soft: 4px 5px 0 -1px var(--sw-shade-16), 6px 12px 16px -6px var(--sw-shade-16);
+  --sw-relief-in:   inset 3px 4px 8px -2px var(--sw-shade-48), inset -1px -1px 4px 0 var(--sw-mist-35);
+  --sw-seam:        inset 2px 3px 0 0 var(--sw-mist-35);
+
+  --sw-ease-clay: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --sw-ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --sw-dur-fast: 140ms;
+  --sw-dur-base: 220ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sw-bg:        #1E1A15;
+    --sw-bg-deep:   #17130E;
+    --sw-surface:   #28231D;
+    --sw-raised:    #302A22;
+
+    --sw-clay-50:  #38261C;
+    --sw-clay-100: #542E1C;
+    --sw-clay-300: #C0694A;
+
+    --sw-sage-100: #2A241A;
+    --sw-glaze-100: #332817;
+    --sw-glaze-500: #C99A3E;
+
+    --sw-ink:       #F2EDE2;
+    --sw-ink-soft:  #C4BAA8;
+    --sw-ink-faint: #8A8070;
+
+    --sw-link:         #E89B7D;
+    --sw-link-hover:   #F4B89A;
+    --sw-link-visited: #B89AC8;
+
+    --sw-mist-65: rgba(255,255,255,0.07);
+    --sw-mist-35: rgba(255,255,255,0.05);
+    --sw-shade-16: rgba(0,0,0,0.40);
+    --sw-shade-28: rgba(0,0,0,0.55);
+    --sw-shade-48: rgba(0,0,0,0.70);
+
+    --sw-glow-a: #3A2418;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--sw-bg);
+  background-image: var(--sk-bg);
+  background-attachment: fixed;
+  color: var(--sw-ink);
+  font-family: var(--sw-font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+main, section, article, header, footer, nav, aside, figure {
+  display: block;
+}
+
+main {
+  max-width: 880px;
+  margin-inline: auto;
+  padding: var(--sw-sp-6) var(--sw-sp-5);
+}
+
+::selection { background: var(--sw-clay-300); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--sw-bg-deep); }
+::-webkit-scrollbar-thumb {
+  background: var(--sw-clay-300);
+  border-radius: var(--sw-radius-pill);
+  border: 3px solid var(--sw-bg);
+}
+
+/* ============================================================
+   2. ТИПОГРАФИКА
+   ============================================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sw-font-display);
+  color: var(--sw-ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 1.6em 0 0.6em;
+}
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child { margin-top: 0; }
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); font-weight: 500; line-height: 1.06; letter-spacing: -0.025em; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.05rem; font-family: var(--sw-font-body); font-weight: 700; }
+h6 {
+  font-size: 0.85rem; font-family: var(--sw-font-body); font-weight: 700;
+  color: var(--sw-clay-700); text-transform: none;
+}
+
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+small { color: var(--sw-ink-faint); font-size: 0.85em; }
+strong, b { font-weight: 700; color: var(--sw-ink); }
+em, i { color: var(--sw-ink-soft); }
+
+a {
+  color: var(--sw-link);
+  text-decoration: none;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  background-image: linear-gradient(var(--sw-link), var(--sw-link));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size var(--sw-dur-base) var(--sw-ease-soft), color var(--sw-dur-base);
+}
+a:hover { color: var(--sw-link-hover); background-size: 100% 1.5px; }
+a:visited { color: var(--sw-link-visited); }
+a:focus-visible { outline: 2px solid var(--sw-clay-500); outline-offset: 2px; border-radius: 2px; }
+
+/* Ссылки внутри "кнопочного" контекста (nav, header actions) не
+   получают авто-подчёркивание — см. секцию навигации ниже */
+
+hr {
+  border: none;
+  height: 1px;
+  background: var(--sw-bg-deep);
+  margin: var(--sw-sp-6) 0;
+}
+
+blockquote {
+  margin: var(--sw-sp-5) 0;
+  padding: var(--sw-sp-4) var(--sw-sp-5);
+  border-left: 4px solid var(--sw-clay-500);
+  background: var(--sw-surface);
+  border-radius: 0 var(--sw-radius-md) var(--sw-radius-md) 0;
+  color: var(--sw-ink-soft);
+  font-style: normal;
+  box-shadow: var(--sw-seam);
+}
+blockquote p:last-child { margin-bottom: 0; }
+blockquote cite {
+  display: block;
+  margin-top: var(--sw-sp-2);
+  font-size: 0.85rem;
+  color: var(--sw-ink-faint);
+  font-style: normal;
+}
+
+mark {
+  background: linear-gradient(120deg, var(--sw-clay-100) 0%, var(--sw-clay-50) 100%);
+  color: var(--sw-clay-900);
+  padding: 0.05em 0.35em;
+  border-radius: 5px;
+  font-weight: 600;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+@media (prefers-color-scheme: dark) { mark { color: #FFE0CC; } }
+
+time {
+  font-family: var(--sw-font-mono);
+  font-size: 0.9em;
+  color: var(--sw-ink-faint);
+  font-weight: 500;
+}
+
+abbr[title] { text-decoration: underline dotted; cursor: help; }
+sub, sup { font-size: 0.75em; }
+kbd {
+  font-family: var(--sw-font-mono);
+  font-size: 0.85em;
+  background: var(--sw-bg-deep);
+  border-radius: 6px;
+  padding: 0.15em 0.5em;
+  box-shadow: var(--sw-relief-soft);
+  color: var(--sw-ink);
+}
+
+/* ============================================================
+   3. СПИСКИ
+   ============================================================ */
+ul, ol { padding-left: 1.4em; margin: 0 0 1.1em; }
+li { margin-bottom: 0.4em; line-height: 1.6; }
+li::marker { color: var(--sw-clay-500); }
+ul li { padding-left: 0.2em; }
+dl { margin: 0 0 1.1em; }
+dt { font-weight: 700; color: var(--sw-ink); margin-top: 0.6em; }
+dd { margin: 0.2em 0 0; color: var(--sw-ink-soft); padding-left: 1em; }
+
+/* ------------------------------------------------------------
+   3.1 ВЕРТИКАЛЬНЫЙ РИТМ — защитная сетка отступов
+
+   У большинства блочных тегов margin уже задан явно в их
+   собственных правилах (table, pre, article, aside и т.д.).
+   Это правило — страховка на случай смежных блоков, у которых
+   соприкасающиеся margin недостаточны (например: `<p>` с малым
+   margin-bottom прямо перед `<ul>` без собственного margin-top).
+   Действует только когда блок НЕ первый в родителе — первый
+   элемент получает отступ от padding самого родителя, а не от
+   margin-top, иначе появлялся бы лишний воздух сверху каждой
+   секции/карточки.
+------------------------------------------------------------ */
+* + p, * + ul, * + ol, * + dl,
+* + table, * + pre, * + blockquote,
+* + details, * + figure, * + form,
+* + fieldset, * + dialog, * + iframe {
+  margin-top: var(--sw-sp-4);
+}
+
+/* ============================================================
+   4. LAYOUT-ТЕГИ — header/nav/footer/aside/section/article
+   ============================================================ */
+
+/* HEADER — подразумевается шапка страницы. Если внутри есть nav,
+   автоматически выстраивается в строку (бренд + меню) */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sw-sp-4);
+  flex-wrap: wrap;
+  padding: var(--sw-sp-3) var(--sw-sp-5);
+  margin-bottom: var(--sw-sp-6);
+  background: var(--sw-mist-65);
+  border-radius: var(--sw-radius-lg);
+  box-shadow: var(--sw-seam), 0 8px 24px -12px var(--sw-shade-16);
+}
+header h1, header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+header nav {
+  margin: 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  display: flex;
+  gap: var(--sw-sp-2);
+  flex-wrap: wrap;
+}
+
+/* NAV вне header — отдельный навигационный блок (например, sidebar
+   или secondary nav). Pill-ссылки в строку. */
+nav {
+  display: flex;
+  gap: var(--sw-sp-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+nav ul {
+  display: flex;
+  gap: var(--sw-sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+nav li { margin: 0; }
+nav a {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--sw-radius-pill);
+  color: var(--sw-ink-soft);
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-image: none; /* без подчёркивания, это pill-навигация */
+  transition: background var(--sw-dur-fast), color var(--sw-dur-fast), box-shadow var(--sw-dur-fast);
+}
+nav a:hover { color: var(--sw-clay-700); background: var(--sw-mist-35); }
+nav a[aria-current="page"], nav a[aria-current="true"] {
+  background: var(--sw-surface);
+  color: var(--sw-clay-700);
+  box-shadow: var(--sw-relief-soft);
+}
+/* Swamp без JS не может проставить .is-active сам — используйте
+   aria-current="page" на текущей ссылке (это и семантически
+   правильно, и единственный надёжный classless-сигнал) */
+
+/* FOOTER — наследует фон страницы, не отдельный цветной блок */
+footer {
+  margin-top: var(--sw-sp-6);
+  padding-top: var(--sw-sp-5);
+  border-top: 1px solid var(--sw-bg-deep);
+  color: var(--sw-ink-faint);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sw-sp-3);
+}
+footer a { color: var(--sw-ink-faint); }
+footer a:hover { color: var(--sw-clay-700); }
+
+/* SECTION — смысловой блок контента, с воздухом между секциями */
+section {
+  margin-bottom: var(--sw-sp-6);
+}
+section + section {
+  padding-top: var(--sw-sp-5);
+  border-top: 1px solid var(--sw-bg-deep);
+}
+
+/* ARTICLE — самостоятельная единица контента (карточка-пост),
+   получает полный "глиняный" рельеф, в отличие от section */
+article {
+  background: var(--sw-surface);
+  border-radius: var(--sw-radius-clay);
+  padding: var(--sw-sp-5);
+  margin: var(--sw-sp-5) 0;
+  box-shadow: var(--sw-relief-out), var(--sw-seam);
+}
+article > *:last-child { margin-bottom: 0; }
+article header {
+  background: none;
+  box-shadow: none;
+  padding: 0 0 var(--sw-sp-3);
+  margin-bottom: var(--sw-sp-3);
+  border-bottom: 1px solid var(--sw-bg-deep);
+  border-radius: 0;
+}
+
+/* ASIDE — вспомогательный блок (заметка/сайдбар-врезка),
+   визуально приглушённый относительно основного контента */
+aside {
+  background: var(--sw-clay-50);
+  border-radius: var(--sw-radius-md);
+  padding: var(--sw-sp-4) var(--sw-sp-5);
+  margin: var(--sw-sp-5) 0;
+  font-size: 0.92rem;
+  color: var(--sw-ink-soft);
+  box-shadow: var(--sw-seam);
+}
+aside > *:last-child { margin-bottom: 0; }
+
+/* FIGURE / FIGCAPTION */
+figure {
+  margin: var(--sw-sp-5) 0;
+  text-align: center;
+}
+figure img, figure video {
+  border-radius: var(--sw-radius-md);
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+  max-width: 100%;
+}
+figcaption {
+  margin-top: var(--sw-sp-2);
+  font-size: 0.85rem;
+  color: var(--sw-ink-faint);
+}
+
+img, video, svg, canvas { max-width: 100%; height: auto; display: block; }
+
+/* ============================================================
+   5. ФОРМЫ
+   ============================================================ */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sw-sp-4);
+  margin: var(--sw-sp-5) 0;
+}
+fieldset {
+  border: none;
+  background: var(--sw-surface);
+  border-radius: var(--sw-radius-clay);
+  padding: var(--sw-sp-5);
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sw-sp-4);
+}
+legend {
+  font-family: var(--sw-font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0 0 var(--sw-sp-2);
+}
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--sw-ink-soft);
+  display: block;
+  margin-bottom: var(--sw-sp-2);
+}
+
+/* Текстовые поля — утопленный рельеф, как в SkUI Kit */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="button"]):not([type="submit"]):not([type="file"]):not([type="color"]),
+textarea {
+  font-family: var(--sw-font-body);
+  font-size: 1rem;
+  color: var(--sw-ink);
+  background: var(--sw-bg);
+  border: none;
+  border-radius: var(--sw-radius-sm);
+  padding: 0.8rem 1rem;
+  box-shadow: var(--sw-relief-in);
+  width: 100%;
+  transition: box-shadow var(--sw-dur-base) var(--sw-ease-soft);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  input, textarea, select { color-scheme: dark; }
+}
+input::placeholder, textarea::placeholder { color: var(--sw-ink-faint); }
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: var(--sw-relief-in), 0 0 0 3px var(--sw-clay-100);
+}
+textarea { resize: vertical; min-height: 5.5rem; line-height: 1.6; }
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(48%) sepia(52%) saturate(600%) hue-rotate(330deg) brightness(95%);
+  cursor: pointer;
+}
+
+input[type="color"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 2.6rem; height: 2.6rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+  background: var(--sw-surface);
+}
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 4px; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
+input[type="color"]::-moz-color-swatch { border: none; border-radius: 50%; }
+
+input[type="file"] {
+  font-family: var(--sw-font-body);
+  font-size: 0.9rem;
+  color: var(--sw-ink-soft);
+  cursor: pointer;
+  background: none;
+}
+input[type="file"]::file-selector-button {
+  font-family: var(--sw-font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--sw-ink);
+  background: var(--sw-surface);
+  border: none;
+  border-radius: var(--sw-radius-md);
+  padding: 0.6rem 1.1rem;
+  margin-right: var(--sw-sp-3);
+  cursor: pointer;
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+}
+
+/* SELECT — намеренно НЕ полная кастомизация (это вне задачи
+   Swamp). Убираем грубую системную стрелку через appearance:none
+   и рисуем простую CSS-стрелку фоновым изображением — без JS,
+   список опций остаётся нативным (как и положено classless-
+   фреймворку: Water.css/MVP.css делают так же). */
+select {
+  font-family: var(--sw-font-body);
+  font-size: 1rem;
+  color: var(--sw-ink);
+  background-color: var(--sw-bg);
+  background-image: linear-gradient(45deg, transparent 50%, var(--sw-clay-500) 50%),
+                     linear-gradient(135deg, var(--sw-clay-500) 50%, transparent 50%);
+  background-position: calc(100% - 1.3rem) center, calc(100% - 1rem) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: var(--sw-radius-sm);
+  padding: 0.8rem 2.6rem 0.8rem 1rem;
+  box-shadow: var(--sw-relief-in);
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+select:focus { outline: none; box-shadow: var(--sw-relief-in), 0 0 0 3px var(--sw-clay-100); }
+
+/* Чекбокс — квадратный, радио — круглое (та же логика, что и в Kit) */
+input[type="checkbox"], input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.3rem; height: 1.3rem;
+  background: var(--sw-bg);
+  box-shadow: var(--sw-relief-in);
+  cursor: pointer;
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+  transition: box-shadow var(--sw-dur-fast), background var(--sw-dur-fast);
+}
+input[type="checkbox"] { border-radius: 5px; }
+input[type="radio"] { border-radius: 50%; }
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+  background: linear-gradient(150deg, var(--sw-clay-300), var(--sw-clay-500));
+  box-shadow: var(--sw-relief-soft);
+}
+input[type="checkbox"]:checked::after {
+  content: "";
+  width: 0.45rem; height: 0.45rem;
+  background: #fff;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="radio"]:checked::after { content: ""; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: #fff; }
+input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible {
+  outline: 3px solid var(--sw-clay-500); outline-offset: 2px;
+}
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.6rem;
+  border-radius: var(--sw-radius-pill);
+  background: var(--sw-bg-deep);
+  box-shadow: var(--sw-relief-in);
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.3rem; height: 1.3rem;
+  border-radius: 50%;
+  background: linear-gradient(150deg, var(--sw-clay-300), var(--sw-clay-500));
+  box-shadow: var(--sw-relief-soft);
+  cursor: grab;
+  margin-top: -0.35rem;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 1.3rem; height: 1.3rem;
+  border-radius: 50%; border: none;
+  background: linear-gradient(150deg, var(--sw-clay-300), var(--sw-clay-500));
+  box-shadow: var(--sw-relief-soft);
+  cursor: grab;
+}
+input[type="range"]:focus-visible { outline: 3px solid var(--sw-clay-500); outline-offset: 3px; }
+
+/* Группа подписи рядом с чекбоксом/радио: <label><input>Текст</label> */
+label:has(input[type="checkbox"]), label:has(input[type="radio"]) {
+  display: flex;
+  align-items: center;
+  gap: var(--sw-sp-3);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* BUTTON и input[type=submit/button] — выпуклый рельеф */
+button, input[type="submit"], input[type="button"], input[type="reset"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--sw-font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--sw-radius-md);
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(150deg, var(--sw-clay-300) 0%, var(--sw-clay-500) 100%);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.18);
+  box-shadow: var(--sw-relief-soft), inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform var(--sw-dur-base) var(--sw-ease-clay), box-shadow var(--sw-dur-base);
+  white-space: nowrap;
+}
+button:hover, input[type="submit"]:hover, input[type="button"]:hover { transform: translateY(-2px); }
+button:active, input[type="submit"]:active, input[type="button"]:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: var(--sw-relief-in);
+}
+button:focus-visible, input[type="submit"]:focus-visible, input[type="button"]:focus-visible {
+  outline: 3px solid var(--sw-clay-500); outline-offset: 3px;
+}
+button:disabled, input:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
+
+/* Secondary-кнопка по семантике: второй и далее button в одной форме,
+   а также явно type=reset — визуально менее весомые, чтобы не
+   соревноваться за внимание с основным сабмитом */
+input[type="reset"], button[type="reset"] {
+  background: var(--sw-surface);
+  color: var(--sw-ink-soft);
+  text-shadow: none;
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+}
+
+/* ============================================================
+   6. ТАБЛИЦЫ
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  border-radius: var(--sw-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--sw-relief-out), var(--sw-seam);
+  background: var(--sw-surface);
+  margin: var(--sw-sp-5) 0;
+}
+caption {
+  font-weight: 700;
+  padding: var(--sw-sp-3);
+  text-align: left;
+  color: var(--sw-ink);
+}
+th {
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--sw-ink);
+  background: var(--sw-bg-deep);
+  padding: 0.75rem 1.1rem;
+}
+td {
+  padding: 0.85rem 1.1rem;
+  color: var(--sw-ink);
+  border-bottom: 1px solid var(--sw-bg-deep);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr { transition: background var(--sw-dur-fast); }
+tbody tr:hover { background: var(--sw-bg); }
+
+/* ============================================================
+   7. КОД И ПРЕФОРМАТИРОВАННЫЙ ТЕКСТ
+   Без автоподсветки (это JS-функциональность, вне Swamp) —
+   просто стилизованный моноширинный блок в стиле кита.
+   ============================================================ */
+code {
+  font-family: var(--sw-font-mono);
+  font-size: 0.88em;
+  background: var(--sw-bg-deep);
+  color: var(--sw-clay-700);
+  padding: 0.15em 0.45em;
+  border-radius: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  code { color: var(--sw-clay-300); }
+}
+pre {
+  background: #1A1614;
+  color: #E8E0D0;
+  border-radius: var(--sw-radius-lg);
+  padding: var(--sw-sp-5);
+  overflow-x: auto;
+  box-shadow: var(--sw-relief-out);
+  line-height: 1.7;
+  margin: var(--sw-sp-5) 0;
+}
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   8. DETAILS / SUMMARY — аккордеон без единой строчки JS
+   ============================================================ */
+details {
+  background: var(--sw-surface);
+  border-radius: var(--sw-radius-md);
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+  padding: 0;
+  margin: var(--sw-sp-3) 0;
+  overflow: hidden;
+}
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sw-sp-4) var(--sw-sp-5);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--sw-ink);
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: "▾";
+  font-size: 0.75rem;
+  color: var(--sw-clay-500);
+  transition: transform var(--sw-dur-base) var(--sw-ease-clay);
+  margin-left: var(--sw-sp-3);
+}
+details[open] summary::after { transform: rotate(180deg); }
+details > *:not(summary) {
+  padding: 0 var(--sw-sp-5) var(--sw-sp-4);
+  color: var(--sw-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+details summary:focus-visible {
+  outline: 3px solid var(--sw-clay-500); outline-offset: -3px;
+}
+
+/* ============================================================
+   9. DIALOG — нативная модалка, без JS-открытия/закрытия логики
+   (управляется атрибутом open или вызовом .showModal() из вашего
+   кода — стилизация работает в обоих случаях без участия Swamp)
+   ============================================================ */
+dialog {
+  background: var(--sw-raised);
+  border: none;
+  border-radius: var(--sw-radius-lg);
+  padding: var(--sw-sp-5);
+  box-shadow: var(--sw-relief-out), var(--sw-seam);
+  max-width: 480px;
+  width: 90%;
+  color: var(--sw-ink);
+  margin: var(--sw-sp-5) auto;
+}
+dialog::backdrop {
+  background: rgba(30, 22, 12, 0.5);
+}
+dialog > *:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   10. PROGRESS / METER
+   ============================================================ */
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  border-radius: var(--sw-radius-pill);
+  overflow: hidden;
+  background: var(--sw-bg-deep);
+  box-shadow: var(--sw-relief-in);
+  border: none;
+  margin: var(--sw-sp-3) 0;
+}
+progress::-webkit-progress-bar { background: var(--sw-bg-deep); }
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, var(--sw-clay-300), var(--sw-clay-500));
+  border-radius: var(--sw-radius-pill);
+}
+progress::-moz-progress-bar {
+  background: linear-gradient(90deg, var(--sw-clay-300), var(--sw-clay-500));
+  border-radius: var(--sw-radius-pill);
+}
+
+meter {
+  display: block;
+  width: 100%;
+  height: 0.8rem;
+  margin: var(--sw-sp-3) 0;
+}
+
+/* ============================================================
+   11. ПРОЧИЕ СЕМАНТИЧЕСКИЕ ТЕГИ
+   ============================================================ */
+address {
+  font-style: normal;
+  color: var(--sw-ink-soft);
+  line-height: 1.6;
+}
+q { font-style: italic; color: var(--sw-ink-soft); }
+q::before, q::after { color: var(--sw-clay-500); }
+del { color: var(--sw-ink-faint); text-decoration: line-through; }
+ins { color: var(--sw-success); text-decoration: none; border-bottom: 1px dashed var(--sw-success); }
+samp, var { font-family: var(--sw-font-mono); font-size: 0.92em; }
+
+optgroup { font-weight: 700; color: var(--sw-ink-faint); }
+datalist { display: none; }
+
+output {
+  display: inline-block;
+  font-family: var(--sw-font-mono);
+  font-weight: 700;
+  color: var(--sw-clay-700);
+  background: var(--sw-clay-50);
+  padding: 0.15em 0.6em;
+  border-radius: var(--sw-radius-pill);
+}
+
+/* Горизонтальная мини-таблица сравнения значений (например,
+   <data>/<dfn>) — даём dfn акцентный стиль термина */
+dfn {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--sw-clay-700);
+  border-bottom: 1px dotted var(--sw-clay-300);
+}
+
+/* iframe/embed/object — мягкое скругление, как у медиа */
+iframe, embed, object {
+  border-radius: var(--sw-radius-md);
+  box-shadow: var(--sw-relief-soft), var(--sw-seam);
+  border: none;
+  max-width: 100%;
+  margin: var(--sw-sp-5) 0;
+}
+
+/* ============================================================
+   12. АДАПТИВНОСТЬ
+   ============================================================ */
+@media (max-width: 720px) {
+  main { padding: var(--sw-sp-5) var(--sw-sp-4); }
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  header nav { justify-content: center; }
+  table { font-size: 0.85rem; }
+  th, td { padding: 0.6rem 0.75rem; }
+  footer { flex-direction: column; text-align: center; }
+  article, fieldset { padding: var(--sw-sp-4); }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+  dialog { width: 94%; padding: var(--sw-sp-4); }
+}
+
+/* ============================================================
+   13. ДОСТУПНОСТЬ
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
